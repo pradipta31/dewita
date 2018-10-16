@@ -20,7 +20,7 @@
       </div>
     </div>
     {{-- <div class="row"> --}}
-      <form role="form" action="{{Help::url('article')}}" method="post">
+      <form role="form" action="{{Help::url('article')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">

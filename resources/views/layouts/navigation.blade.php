@@ -1,9 +1,5 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
-    
-
-    
-
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">

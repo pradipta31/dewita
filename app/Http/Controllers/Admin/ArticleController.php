@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use Alert;
 use Help;
+use Storage;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -44,26 +46,20 @@ class ArticleController extends Controller
             'title' => 'required',
             'desc' => 'required',
             'place' => 'required',
-            'file' => 'required',
+            'file' => 'required|file',
         ]);
-        $response = [];
-        if (Article::where('title','=',$request->title)->get()->count() > 0) {
-            $response = [
-                'messages' => ['Artikel sudah ada.']
-            ];
-            return response()->json($response);
-        }else{
-            $post = Article::create([
-                'title' => $request->title,
-                'desc' => $request->desc,
-                'place' => $request->place,
-                'file' => json_encode($request->file),
-            ]);
 
-            $response = [
-                'messages' => ['Artikel berhasil disimpan!'],
-            ];
-        }
+        $uploadedFile = $request->file('file');        
+        $path = $uploadedFile->store('public/articleimage');
+        $file = Article::create([
+            'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+            'slug' => str_slug($request->title),
+            'desc' => $request->desc,
+            'file' => $path,
+            'place' => $request->place
+        ]);
+        $file = Carbon::now();
+        $file = new Carbon();
         
         return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah disimpan!');
     }

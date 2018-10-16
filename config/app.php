@@ -151,6 +151,7 @@ return [
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -216,6 +217,7 @@ return [
         'Help' => App\Libraries\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
