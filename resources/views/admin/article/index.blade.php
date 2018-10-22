@@ -36,6 +36,7 @@
                   <th width="25px"><center>No</center></th>
                   <th><center>Judul</center></th>
                   <th><center>Tempat</center></th>
+                  <th><center>Cover</center></th>
                   <th><center>Waktu Publish</center></th>
                   <th><center>Opsi</center></th>
                 </tr>
@@ -49,6 +50,7 @@
                         <td><center> {{$no++}} </center></td>
                         <td><center> {{$article->title}} </center></td>
                         <td><center> {{$article->place}} </center></td>
+                        <td><center> <a href="http://" class="btn btn-sm btn-success">View Image</a> </center></td>
                         <td><center> {{$article->created_at}} </center></td>
                         <td><center>
                             <a href="{{Help::url('article/'.$article->id.'/edit')}}" class="fa fa-pencil"></a>

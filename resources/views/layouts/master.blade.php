@@ -9,7 +9,7 @@
     <title> Admin | Dewita </title>
     <link rel="icon" href="{{asset('images/logo.jpeg')}}">
     <link href=" {{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}} " rel="stylesheet">
-    <link href=" {{asset('vendors/font-awesome/css/font-awesome.min.css')}} " rel="stylesheet">
+    <link href=" {{asset('vendors/font-awesome/font-awesome/css/font-awesome.min.css')}} " rel="stylesheet">
     <link href=" {{asset('build/css/custom.min.css')}} " rel="stylesheet">
     @yield('css')
   </head>

@@ -5,11 +5,12 @@
             <!-- home content -->
             <div class="col-md-10 col-md-offset-1">
                 <div class="home-content">
-                    <h1 class="white-text">Welcome to Home Page Dewita.co</h1>
-                    <p class="white-text">Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere.
-                    </p>
-                    <button class="white-btn">Get Started!</button>
-                    <button class="main-btn">Learn more</button>
+                    <div class="image">
+                        <img src="{{asset('images/logo_dewita.png')}}" alt="" height="250px" width="250px">
+                    </div>
+                    <h1 class="white-text">"Belanja Asik ?</h1>
+                    <h1 class="white-text">Dewita.co Aja!"</h1>
+                    <p class="white-text">- Dewita.co -</p>
                 </div>
             </div>
             <!-- /home content -->

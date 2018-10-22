@@ -20,15 +20,16 @@
 
         <!--  Main navigation  -->
         <ul class="main-nav nav navbar-nav navbar-right">
-            <li><a href="{{url('/')}}">Home</a></li>
-            <li><a href="{{url('artikel')}}">Artikel</a></li>
-            <li class="has-dropdown"><a href="javascript:void()">Products</a>
+            <li class="{{{ (Request::is('home') ? 'class=active' : '') }}}"><a href="{{url('/')}}">Home</a></li>
+            <li class="{{{ (Request::is('article') ? 'class=active' : '') }}}"><a href="{{url('article')}}">Artikel</a></li>
+            <li class="has-dropdown {{{ (Request::is('products') ? 'class=active' : '') }}}"><a href="javascript:void()">Products</a>
                 <ul class="dropdown">
-                    <li><a href="blog-single.html">Morvey</a></li>
-                    <li><a href="blog-single.html">Dewita</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/dewita.co/">Fashion</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/morvey.store.bali/">Souvenir</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/sahabatkonveksibali/">Konveksi</a></li>
                 </ul>
             </li>
-            <li><a href="#contact">About Us</a></li>
+            <li class="{{{ (Request::is('about-us') ? 'class=active' : '') }}}"><a href="{{url('about-us')}}">About Us</a></li>
         </ul>
         <!-- /Main navigation -->
 

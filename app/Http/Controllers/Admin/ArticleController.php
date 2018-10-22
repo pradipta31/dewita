@@ -6,6 +6,7 @@ use App\Article;
 use Alert;
 use Help;
 use Storage;
+use Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -49,17 +50,21 @@ class ArticleController extends Controller
             'file' => 'required|file',
         ]);
 
-        $uploadedFile = $request->file('file');        
-        $path = $uploadedFile->store('public/articleimage');
+        
+        $input           = Input::all();
+        $file            = array_get($input, 'image');
+        $destinationPath = public_path('public/articleimage');
+        $fileName        = $request->file->getClientOriginalName();
+        $imageResize     = Image::make($file->getRealPath())
+                        ->resize(50,50,function($c){$c->aspectRatio(); $c->upsize();})->save($destinationPath.'/'.$fileName);  
+        $filepath        = $destinationPath.'/'.$path;
         $file = Article::create([
             'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
             'slug' => str_slug($request->title),
             'desc' => $request->desc,
-            'file' => $path,
+            'file' => $filepath,
             'place' => $request->place
         ]);
-        $file = Carbon::now();
-        $file = new Carbon();
         
         return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah disimpan!');
     }
@@ -83,7 +88,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Article::findOrFail($id);
+        return view('admin.article.edit', compact('data'));
     }
 
     /**

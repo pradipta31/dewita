@@ -4,8 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Article;
 use Storage;
-use Help;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $news = Article::all();
+        return view('frontend.article.index', compact('news'));
     }
 
     /**
@@ -50,8 +49,8 @@ class ArticleController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        $articles = Article::where('slug','=',$slug)->firstOrFail();
-        return view('frontend.article.show', compact('article'));
+        $news = Article::where('slug','=',$slug)->firstOrFail();
+        return view('frontend.article.show', compact('news'));
     }
 
     /**

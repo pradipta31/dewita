@@ -49,5 +49,8 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 
 
 Route::get('/', 'User\HomeController@index');
 Route::resource('article', 'User\ArticleController');
+Route::get('about-us', function(){
+    return view('frontend.about.index');
+});
 
 // Route::get('/home', 'HomeController@index')->name('home');

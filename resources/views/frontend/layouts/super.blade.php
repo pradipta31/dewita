@@ -34,7 +34,8 @@
 
 	</div>
     <!-- Blog -->
-    @include('frontend.layouts.article')
+	@include('frontend.article.article')
+	{{-- @yield('content') --}}
 	<!-- /Blog -->
 
 	<!-- Contact -->
