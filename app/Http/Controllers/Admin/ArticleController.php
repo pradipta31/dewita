@@ -47,25 +47,20 @@ class ArticleController extends Controller
             'title' => 'required',
             'desc' => 'required',
             'place' => 'required',
-            'file' => 'required|file',
+            'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
         ]);
-
-        
-        $input           = Input::all();
-        $file            = array_get($input, 'image');
-        $destinationPath = public_path('public/articleimage');
-        $fileName        = $request->file->getClientOriginalName();
-        $imageResize     = Image::make($file->getRealPath())
-                        ->resize(50,50,function($c){$c->aspectRatio(); $c->upsize();})->save($destinationPath.'/'.$fileName);  
-        $filepath        = $destinationPath.'/'.$path;
-        $file = Article::create([
-            'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
-            'slug' => str_slug($request->title),
-            'desc' => $request->desc,
-            'file' => $filepath,
-            'place' => $request->place
-        ]);
-        
+        $gambar = $request->file('file');
+        $filename = time() . '.' . $gambar->getClientOriginalExtension();
+        if ($request->file('file')->isValid()) {
+            Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+            $file = Article::create([
+                'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+                'slug' => str_slug($request->title),
+                'desc' => $request->desc,
+                'file' => $filename,
+                'place' => $request->place
+            ]);
+        }
         return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah disimpan!');
     }
 
@@ -101,7 +96,25 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = Validator::make($request->all(),[
+            'title' => 'required',
+            'desc' => 'required',
+            'place' => 'required',
+            'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
+        ]);
+        $gambar = $request->file('file');
+        $filename = time() . '.' . $gambar->getClientOriginalExtension();
+        if ($request->file('file')->isValid()) {
+            Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+            $file = Article::findOrFail($id)->update([
+                'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+                'slug' => str_slug($request->title),
+                'desc' => $request->desc,
+                'file' => $filename,
+                'place' => $request->place
+            ]);
+        }
+        return redirect(Help::url('article/create'))->with('message', 'Artikel telah diperbaharui!');
     }
 
     /**

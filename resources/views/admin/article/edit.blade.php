@@ -41,7 +41,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="">Cover</label>
-                    <input type="file" name="file" id="">
+                    <input type="file" name="file" id="" value="{{$data->file}}">
                   </div>
                 </div>
               </div>

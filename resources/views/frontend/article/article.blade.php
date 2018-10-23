@@ -14,9 +14,11 @@
                     <div class="blog">
                         @php
                             $descs = strip_tags($article->desc);
+                            $image = $article->file;
+                            // $data['file'] = 'images/article/' . $request->file('file')->getClientOriginalName();
                         @endphp
                         <div class="blog-img">
-                            <img class="img-responsive" src="{{ Storage::url($article->file) }}" alt="{{$article->title}}">
+                            <img class="img-responsive" src="{{ asset('images/article/'.$image) }}" alt="{{$article->title}}">
                         </div>
                         <div class="blog-content">
                             <ul class="blog-meta">

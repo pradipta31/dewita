@@ -50,9 +50,10 @@
 					<div class="blog">
 						@php
 							$descs = strip_tags($article->desc);
+							$gambar = $article->file;
 						@endphp
 						<div class="blog-img">
-							<img class="img-responsive" src="{{ Storage::url($article->file) }}" alt="{{$article->title}}">
+							<img class="img-responsive" src="{{ asset('images/article/'.$gambar) }}" alt="{{$article->title}}">
 						</div>
 						<div class="blog-content">
 							<ul class="blog-meta">

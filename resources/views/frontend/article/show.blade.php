@@ -24,15 +24,17 @@
             <div class="container">
                     <!-- Row -->
                 <div class="row">
-    
+                    @php
+                        $gambar = $news->file;
+                    @endphp
                         <!-- Main -->
                         <main id="main" class="col-md-9">
                             <div class="blog">
                                     {{-- <h3>{{$news->title}}</h3> --}}
                                 <div class="blog-img">
-                                    <img class="img-responsive" src="{{ Storage::url($news->file) }}" alt="">
+                                    <img class="img-responsive" src="{{ asset('images/article/'.$gambar) }}" alt="" height="650px" width="700px">
                                 </div>
-                                <div class="blog-content">
+                                <div class="blog-content" style="color:#1d1d1e">
                                     <ul class="blog-meta">
                                         {{-- <li><i class="fa fa-user"></i>John doe</li> --}}
                                         <li><i class="fa fa-clock-o"></i>{{$news->created_at->format('d-m-Y')}}</li>
