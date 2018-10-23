@@ -50,7 +50,7 @@
                         <td><center> {{$no++}} </center></td>
                         <td><center> {{$article->title}} </center></td>
                         <td><center> {{$article->place}} </center></td>
-                        <td><center> <a href="http://" class="btn btn-sm btn-success">View Image</a> </center></td>
+                        <td><center> <a href="{{asset('images/article/'.$article->file)}}" onclick="lihatEvent()" class="btn btn-sm btn-success" onclick="showImage('{{json_encode($article)}}')">Lihat Cover</a></center></td>
                         <td><center> {{$article->created_at}} </center></td>
                         <td><center>
                             <a href="{{Help::url('article/'.$article->id.'/edit')}}" class="fa fa-pencil"></a>
@@ -58,7 +58,25 @@
                             <a href="javascript:void(0)" class="fa fa-trash" onclick="deleteArticle('{{$article->id}}')"></a>
                         </center></td>
                     </tr>
-                @endforeach    
+                @endforeach
+                <div id="showImage" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cover : {{$article->title}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{asset('images/article/'.$article->file)}}" alt="" id="file" name="file">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 
               </tbody>
             </table>
@@ -89,14 +107,13 @@
     <script src="{{asset('vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
     <script src="{{asset('vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
 
-    {{-- <script>
-        function editModal(data){
-            var periode = JSON.parse(data);
-            $('#formEdit').attr('action', '{{url('admin/periode')}}');
-            $('#periode').val(periode.periode);
-            $('#editModal').modal('show');
+    <script>
+        function showImage(data){
+            var file = JSON.parse(data);
+            $('#file').val(file.file);
+            $('#showImage').modal('show');
         }
-    </script> --}}
+    </script>
 
     <script src="{{asset('plugins/bootbox/bootbox.min.js')}}"></script>
     <script type="text/javascript">
