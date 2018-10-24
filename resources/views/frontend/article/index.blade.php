@@ -61,7 +61,7 @@
 							</ul>
 							<a href="{{url('article/'.$article->slug)}}"><h3>{{$article->title}}</h3></a>
 							<p>{!! str_limit($descs, 100) !!}</p>
-							<a href="{{url('article/'.$article->slug)}}" class="btn btn-primary">Read more</a>
+							<a href="{{url('article/'.$article->slug)}}" class="btn btn-info">Read more</a>
 						</div>
 					</div>
 				</div>

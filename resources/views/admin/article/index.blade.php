@@ -50,7 +50,7 @@
                         <td><center> {{$no++}} </center></td>
                         <td><center> {{$article->title}} </center></td>
                         <td><center> {{$article->place}} </center></td>
-                        <td><center> <a href="{{asset('images/article/'.$article->file)}}" onclick="lihatEvent()" class="btn btn-sm btn-success" onclick="showImage('{{json_encode($article)}}')">Lihat Cover</a></center></td>
+                        <td><center> <a href="{{asset('images/article/'.$article->file)}}" class="btn btn-sm btn-success" onclick="showImage('{{json_encode($article)}}')">Lihat Cover</a></center></td>
                         <td><center> {{$article->created_at}} </center></td>
                         <td><center>
                             <a href="{{Help::url('article/'.$article->id.'/edit')}}" class="fa fa-pencil"></a>
