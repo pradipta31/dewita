@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
-use App\Article;
-use App\Comment;
-use Storage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $news = Article::all();
-        return view('frontend.article.index', compact('news'));
+        return view('admin.comment.index');
     }
 
     /**
@@ -40,23 +35,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $valid = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required',
-            'comment' => 'required',
-        ]);
-
-        $article = Article::where('slug','=',$request)->firstOrFail();
-        $comment = new Comment;
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->article_id = $article->id;
-        $name = $comment->name;
-        dd($name);
-        // $comment->save();
-
-        // return redirect('article')->with('message', 'Komentar anda berhasil dikirim!');
+        //
     }
 
     /**
@@ -65,10 +44,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $slug)
+    public function show($id)
     {
-        $news = Article::where('slug','=',$slug)->firstOrFail();
-        return view('frontend.article.show', compact('news'));
+        //
     }
 
     /**

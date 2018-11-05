@@ -14,9 +14,9 @@
   <div class="">
     <div class="page-title">
     </div>
-    @if (session('message'))
+    @if(session()->has('alert-success'))
         <div class="alert alert-success">
-            {{ session('message') }}
+            {{ session()->get('alert-success') }}
         </div>
     @endif
     <div class="clearfix"></div>
@@ -28,17 +28,16 @@
             <h2>Data Artikel</h2>
             <div class="clearfix"></div>
           </div>
-          <a href="{{Help::url('article/create')}}" class="btn btn-primary">Tambah Artikel</a>
           <div class="x_content">
             <table id="datatable" class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th width="25px"><center>No</center></th>
-                  <th><center>Judul</center></th>
-                  <th><center>Author</center></th>
-                  <th><center>Tempat</center></th>
-                  <th><center>Cover</center></th>
-                  <th><center>Waktu Publish</center></th>
+                  <th><center>Nama</center></th>
+                  <th><center>Email</center></th>
+                  <th><center>Komentar</center></th>
+                  <th><center>Waktu</center></th>
+                  <th><center>Status</center></th>
                   <th><center>Opsi</center></th>
                 </tr>
               </thead>
@@ -46,21 +45,20 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($articles as $article)
+                {{-- @foreach ($articles as $article) --}}
                     <tr>
                         <td><center> {{$no++}} </center></td>
-                        <td><center> {{$article->title}} </center></td>
-                        <td><center> {{$article->user->name}} </center></td>
-                        <td><center> {{$article->place}} </center></td>
-                        <td><center> <a href="{{asset('images/article/'.$article->file)}}" class="btn btn-sm btn-success">Lihat Cover</a></center></td>
-                        <td><center> {{$article->created_at}} </center></td>
+                        <td><center> Pradipta </center></td>
+                        <td><center> pradipta@gmail.com </center></td>
+                        <td><center> Artikel ini sangat bagus </center></td>
+                        <td><center> 05/11/2018 </center></td>
+                        <td><center> <a href="javascript:void(0)"><span class="btn btn-success btn-sm">Setuju</span></a> </center></td>
                         <td><center>
-                            <a href="{{Help::url('article/'.$article->id.'/edit')}}" class="fa fa-pencil"></a>
                             {{--  <a href="javascript:void(0)" class="fa fa-pencil" onclick="editModal('{{json_encode($periode)}}')"></a>  --}}
-                            <a href="javascript:void(0)" class="fa fa-trash" onclick="deleteArticle('{{$article->id}}')"></a>
+                            <a href="javascript:void(0)" class="fa fa-trash" onclick="deleteArticle"></a>
                         </center></td>
                     </tr>
-                @endforeach
+                {{-- @endforeach --}}
               </tbody>
             </table>
           </div>

@@ -1330,6 +1330,7 @@ header {
 }
 
 .reply-form form .input, .reply-form form .input {
+    background-color: white;
     width: calc(50% - 10px);
     display: inline-block;
 }

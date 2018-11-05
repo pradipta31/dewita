@@ -20,8 +20,9 @@
       </div>
     </div>
     {{-- <div class="row"> --}}
-      <form role="form" action="{{Help::url('article')}}" method="post" enctype="multipart/form-data">
+      <form role="form" action="{{Help::url('article/'.$data->id)}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <input type="hidden" name="_method" value="put">
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="col-md-9 col-sm-9 col-xs-9">

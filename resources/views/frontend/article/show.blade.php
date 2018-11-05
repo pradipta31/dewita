@@ -36,11 +36,12 @@
                                 </div>
                                 <div class="blog-content" style="color:#1d1d1e">
                                     <ul class="blog-meta">
-                                        {{-- <li><i class="fa fa-user"></i>John doe</li> --}}
+                                        <li><i class="fa fa-user"></i>{{$news->user->name}}</li>
                                         <li><i class="fa fa-clock-o"></i>{{$news->created_at->format('d-m-Y')}}</li>
                                     </ul>
                                     <p>{!! $news->desc !!}</p>
                                 </div>
+                                @include('frontend.article.comment')
                             </div>
                         </main>
                         <!-- /Main -->

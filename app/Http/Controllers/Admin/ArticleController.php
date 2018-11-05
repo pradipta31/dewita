@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
-use Alert;
+use App\Comment;
 use Help;
-use Storage;
 use Image;
-use Carbon\Carbon;
+use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -58,7 +57,8 @@ class ArticleController extends Controller
                 'slug' => str_slug($request->title),
                 'desc' => $request->desc,
                 'file' => $filename,
-                'place' => $request->place
+                'place' => $request->place,
+                'user_id' => Auth::id()
             ]);
         }
         return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah disimpan!');
@@ -83,7 +83,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $data = Article::findOrFail($id);
+        $data = Article::find($id);
         return view('admin.article.edit', compact('data'));
     }
 
@@ -94,27 +94,41 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function update(Request $request, $id){
+    //     dd(request()->all());
+    // }
     public function update(Request $request, $id)
     {
+        // dd($request()->all());
         $valid = Validator::make($request->all(),[
             'title' => 'required',
             'desc' => 'required',
             'place' => 'required',
-            'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
+            // 'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
         ]);
-        $gambar = $request->file('file');
-        $filename = time() . '.' . $gambar->getClientOriginalExtension();
-        if ($request->file('file')->isValid()) {
+        
+        if ($request->hasFile('file') == 0) {
+            // Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+            $file = Article::findOrFail($id)->update([
+                'title' => $request->title,
+                'slug' => str_slug($request->title),
+                'desc' => $request->desc,
+                // 'file' => $filename,
+                'place' => $request->place,
+            ]);
+        }elseif ($request->hasFile('file')){
+            $gambar = $request->file('file');
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
             Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
             $file = Article::findOrFail($id)->update([
-                'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+                'title' => $request->title,
                 'slug' => str_slug($request->title),
                 'desc' => $request->desc,
                 'file' => $filename,
-                'place' => $request->place
+                'place' => $request->place,
             ]);
         }
-        return redirect(Help::url('article/create'))->with('message', 'Artikel telah diperbaharui!');
+        return redirect(Help::url('article'))->with('message', 'Artikel telah diperbaharui!');
     }
 
     /**

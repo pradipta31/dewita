@@ -39,6 +39,13 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 
     Route::get('logout', 'LoginController@logout');
     Route::get('dashboard', 'DashboardController@index');
     Route::resource('article', 'ArticleController');
+    // Route::get('article', 'ArticleController@index');
+    // Route::get('article/create', 'ArticleController@create');
+    // Route::post('article','ArticleController@store');
+    // Route::get('article/{id}', 'ArticleController@edit');
+    // Route::put('article/update', 'ArticleController@updateArticle');
+    // Route::delete('article/{id}', 'ArticleController@destroy');
+    Route::resource('comment', 'CommentController');
 });
 
 

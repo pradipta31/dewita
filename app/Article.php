@@ -9,6 +9,15 @@ class Article extends Model
     protected $table = 'articles';
 
     protected $fillable = [
-        'title', 'slug', 'file','desc', 'place',
+        'user_id','title', 'slug', 'file','desc', 'place',
     ];
+
+    public function User(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function Comment(){
+        return $this->hasOne('App\Comment');
+    }
+
 }

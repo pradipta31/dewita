@@ -29,13 +29,14 @@
               <li><a href="{{Help::url('article')}}">Artikel</a></li>
             </ul>
           </li>
+          <li><a href="{{Help::url('comment')}}"><i class="fa fa-users"></i> Komentar </a></li>
           {{-- <li><a><i class="fa fa-gift"></i> Produk <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="{{url('article/create')}}">Tambah Produk</a></li>
               <li><a href="{{url('article')}}">Produk</a></li>
             </ul>
           </li> --}}
-          <li><a href="{{url('')}}"><i class="fa fa-user"></i> Profile </a></li>
+          <li><a href="#"><i class="fa fa-user"></i> Profile </a></li>
           @endif
         </ul>
       </div>
