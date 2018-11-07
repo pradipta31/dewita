@@ -37,7 +37,8 @@
                     <label for="">Tempat</label>
                     <input type="text" name="place" id="" class="form-control" placeholder="Masukan tempat artikel..." value="{{$data->place}}">
                   </div>
-                  <button type="submit" class="btn btn-primary btn-md">Simpan</button>
+                  <input type="submit" name="publish" class="btn btn-primary btn-md" value="Publish">
+                  <input type="submit" name="archive" class="btn btn-success btn-md" value="Simpan Draft">
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">

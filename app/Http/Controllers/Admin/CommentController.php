@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Article;
+use App\Comment;
+use Help;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +17,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return view('admin.comment.index');
+        $comm = Comment::all();
+        return view('admin.comment.index', compact('comm'));
     }
 
     /**
@@ -55,6 +59,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function approve($id){
+        $c = Comment::findOrFail($id);
+        $c->status = 'approved';
+        $c->save();
+        return redirect(Help::url('comment'))->with('alert-success','Komentar disetujui!');
+    }
+
+
     public function edit($id)
     {
         //
@@ -80,6 +92,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+        return redirect(Help::url('comment'))->with('alert-success','Data yang anda pilih berhasil dihapus!');
     }
 }

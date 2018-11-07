@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('file');
             $table->text('desc');
             $table->string('place');
+            $table->enum('status',['published','archived'])->default('archived');
             $table->timestamps();
         });
         Schema::table('articles', function(Blueprint $table){

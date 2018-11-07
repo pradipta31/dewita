@@ -46,25 +46,27 @@
 			
 				<!-- blog -->
 				@foreach ($news as $article)
-				<div class="col-md-4">
-					<div class="blog">
-						@php
-							$descs = strip_tags($article->desc);
-							$gambar = $article->file;
-						@endphp
-						<div class="blog-img">
-							<img class="img-responsive" src="{{ asset('images/article/'.$gambar) }}" alt="{{$article->title}}">
+					@if ($article->status == 'published')
+						<div class="col-md-4">
+							<div class="blog">
+								@php
+									$descs = strip_tags($article->desc);
+									$gambar = $article->file;
+								@endphp
+								<div class="blog-img">
+									<img class="img-responsive" src="{{ asset('images/article/'.$gambar) }}" alt="{{$article->title}}">
+								</div>
+								<div class="blog-content">
+									<ul class="blog-meta">
+										<li><i class="fa fa-clock-o"></i>{{$article->created_at->format('d-m-Y')}}</li>
+									</ul>
+									<a href="{{url('article/'.$article->slug)}}"><h3>{{$article->title}}</h3></a>
+									<p>{!! str_limit($descs, 100) !!}</p>
+									<a href="{{url('article/'.$article->slug)}}" class="btn btn-info">Read more</a>
+								</div>
+							</div>
 						</div>
-						<div class="blog-content">
-							<ul class="blog-meta">
-								<li><i class="fa fa-clock-o"></i>{{$article->created_at->format('d-m-Y')}}</li>
-							</ul>
-							<a href="{{url('article/'.$article->slug)}}"><h3>{{$article->title}}</h3></a>
-							<p>{!! str_limit($descs, 100) !!}</p>
-							<a href="{{url('article/'.$article->slug)}}" class="btn btn-info">Read more</a>
-						</div>
-					</div>
-				</div>
+					@endif
 				@endforeach
 				<!-- /blog -->
 			

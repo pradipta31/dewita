@@ -45,20 +45,31 @@
                 @php
                     $no = 1;
                 @endphp
-                {{-- @foreach ($articles as $article) --}}
+                @foreach ($comm as $c)
                     <tr>
                         <td><center> {{$no++}} </center></td>
-                        <td><center> Pradipta </center></td>
-                        <td><center> pradipta@gmail.com </center></td>
-                        <td><center> Artikel ini sangat bagus </center></td>
-                        <td><center> 05/11/2018 </center></td>
-                        <td><center> <a href="javascript:void(0)"><span class="btn btn-success btn-sm">Setuju</span></a> </center></td>
+                        <td><center> {{$c->name}} </center></td>
+                        <td><center> {{$c->email}} </center></td>
+                        <td><center> {{$c->comment}} </center></td>
+                        <td><center> {{$c->created_at->format('d-m-Y')}} </center></td>
+                        <td><center> 
+                          @if ($c->status == 'approved')
+                            <span class="label label-success">Approved</span>
+                          @else
+                            <span class="label label-warning">Not Approved</span>
+                          @endif 
+                        </center></td>
                         <td><center>
-                            {{--  <a href="javascript:void(0)" class="fa fa-pencil" onclick="editModal('{{json_encode($periode)}}')"></a>  --}}
-                            <a href="javascript:void(0)" class="fa fa-trash" onclick="deleteArticle"></a>
+                            @if ($c->status == 'approved')
+                              <button class="btn btn-success btn-sm" disabled>Approved</button>
+                            @else
+                              <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="approve('{{$c->id}}');">Approve</a> 
+                              {{-- <a href="javascript:void(0)" class="btn btn-warning btn-sm"  onclick="disApprove('{{$c->id}}');">Disapprove</a>  --}}
+                            @endif
+                              <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="deleteComment('{{$c->id}}');">Delete</a>
                         </center></td>
                     </tr>
-                {{-- @endforeach --}}
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -67,6 +78,9 @@
     </div>
   </div>
 </div>
+<form class="hidden" action="" method="post" id="formApprove">
+    {{ csrf_field() }}
+</form>
 <form class="hidden" action="" method="post" id="formDelete">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="delete">
@@ -91,13 +105,23 @@
 
     <script src="{{asset('plugins/bootbox/bootbox.min.js')}}"></script>
     <script type="text/javascript">
-    function deleteArticle(id){
-        bootbox.confirm("Apakah anda ingin menghapus data ini ?", function(result){
-            if (result) {
-                $('#formDelete').attr('action', '{{Help::url('article')}}/'+id);
-                $('#formDelete').submit();
-            }
-        });
+
+    function approve(id){
+      bootbox.confirm("Apakah anda ingin menyetujui komentar ini ?", function(result){
+        if (result) {
+          $('#formApprove').attr('action', '{{Help::url('comment/approve')}}/'+id);
+          $('#formApprove').submit();
+        }
+      });
+    }
+
+    function deleteComment(id){
+      bootbox.confirm("Apakah anda ingin menghapus data ini ?", function(result){
+          if (result) {
+              $('#formDelete').attr('action', '{{Help::url('comment')}}/'+id);
+              $('#formDelete').submit();
+          }
+      });
     }
     </script>
 @endsection

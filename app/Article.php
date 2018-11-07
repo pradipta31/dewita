@@ -9,7 +9,7 @@ class Article extends Model
     protected $table = 'articles';
 
     protected $fillable = [
-        'user_id','title', 'slug', 'file','desc', 'place',
+        'user_id','title', 'slug', 'file','desc', 'place', 'status'
     ];
 
     public function User(){

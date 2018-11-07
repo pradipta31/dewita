@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Article;
 use App\Comment;
-use Storage;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -40,23 +40,23 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $valid = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required',
             'comment' => 'required',
         ]);
+        
 
-        $article = Article::where('slug','=',$request)->firstOrFail();
-        $comment = new Comment;
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->article_id = $article->id;
-        $name = $comment->name;
-        dd($name);
-        // $comment->save();
+        $n = Article::where('id', '=', $request->id)->firstOrFail();
+        $c = new Comment;
+        $c->name = $request->name;
+        $c->email = $request->email;
+        $c->comment = $request->comment;
+        $c->article_id = $n->id;
+        $c->save();
 
-        // return redirect('article')->with('message', 'Komentar anda berhasil dikirim!');
+        return redirect()->back()->with('success', 'Komentar anda berhasil dikirim!');
     }
 
     /**
@@ -68,7 +68,13 @@ class ArticleController extends Controller
     public function show(Request $request, $slug)
     {
         $news = Article::where('slug','=',$slug)->firstOrFail();
-        return view('frontend.article.show', compact('news'));
+        $n = $news->id;
+        // dd($n);
+        $comment = Comment::where('article_id',$n)->get();
+        $count = Comment::where('status','=','approved')->count();
+        // $c = $comment->name;
+        // dd($comment);
+        return view('frontend.article.show', compact('news','comment','count'));
     }
 
     /**

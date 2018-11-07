@@ -38,7 +38,8 @@
                   <th><center>Author</center></th>
                   <th><center>Tempat</center></th>
                   <th><center>Cover</center></th>
-                  <th><center>Waktu Publish</center></th>
+                  <th><center>Waktu</center></th>
+                  <th><center>Status</center></th>
                   <th><center>Opsi</center></th>
                 </tr>
               </thead>
@@ -52,8 +53,15 @@
                         <td><center> {{$article->title}} </center></td>
                         <td><center> {{$article->user->name}} </center></td>
                         <td><center> {{$article->place}} </center></td>
-                        <td><center> <a href="{{asset('images/article/'.$article->file)}}" class="btn btn-sm btn-success">Lihat Cover</a></center></td>
-                        <td><center> {{$article->created_at}} </center></td>
+                        <td><center> <button class="btn btn-sm btn-success" onClick="showImage('{{$article->file}}');">Lihat Cover</button></center></td>
+                        <td><center> {{$article->created_at->format('d-m-Y')}} </center></td>
+                        <td><center> 
+                          @if ($article->status == 'published')
+                            <span class="label label-success">Published</span>
+                          @else
+                            <span class="label label-warning">Archived</span>
+                          @endif 
+                        </center></td>
                         <td><center>
                             <a href="{{Help::url('article/'.$article->id.'/edit')}}" class="fa fa-pencil"></a>
                             {{--  <a href="javascript:void(0)" class="fa fa-pencil" onclick="editModal('{{json_encode($periode)}}')"></a>  --}}
@@ -93,6 +101,15 @@
 
     <script src="{{asset('plugins/bootbox/bootbox.min.js')}}"></script>
     <script type="text/javascript">
+
+    function showImage(file){
+      bootbox.dialog({
+        message: '<img src="{{asset('images/article')}}/'+file+'" class="img-responsive">',
+        closeButton: true,
+        size: 'small'
+      });
+    }
+
     function deleteArticle(id){
         bootbox.confirm("Apakah anda ingin menghapus data ini ?", function(result){
             if (result) {

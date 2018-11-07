@@ -48,20 +48,39 @@ class ArticleController extends Controller
             'place' => 'required',
             'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
         ]);
-        $gambar = $request->file('file');
-        $filename = time() . '.' . $gambar->getClientOriginalExtension();
-        if ($request->file('file')->isValid()) {
-            Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
-            $file = Article::create([
-                'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
-                'slug' => str_slug($request->title),
-                'desc' => $request->desc,
-                'file' => $filename,
-                'place' => $request->place,
-                'user_id' => Auth::id()
-            ]);
+        if($request->get('publish')){
+            $gambar = $request->file('file');
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
+            if ($request->file('file')->isValid()) {
+                Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+                $file = Article::create([
+                    'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    'file' => $filename,
+                    'place' => $request->place,
+                    'status' => 'published',
+                    'user_id' => Auth::id()
+                ]);
+            }
+            return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah ditampilkan!');
+        }elseif($request->get('archive')){
+            $gambar = $request->file('file');
+            $filename = time() . '.' . $gambar->getClientOriginalExtension();
+            if ($request->file('file')->isValid()) {
+                Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+                $file = Article::create([
+                    'title' => $request->title ?? $uploadedFile->getClientOriginalName(),
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    'file' => $filename,
+                    'place' => $request->place,
+                    'status' => 'archived',
+                    'user_id' => Auth::id()
+                ]);
+            }
+            return redirect(Help::url('article/create'))->with('message', 'Artikel berhasil disimpan!');
         }
-        return redirect(Help::url('article/create'))->with('message', 'Artikel baru telah disimpan!');
     }
 
     /**
@@ -107,28 +126,58 @@ class ArticleController extends Controller
             // 'file' => 'required|image|max:3000|mimes:jpeg,jpg,png',
         ]);
         
-        if ($request->hasFile('file') == 0) {
-            // Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
-            $file = Article::findOrFail($id)->update([
-                'title' => $request->title,
-                'slug' => str_slug($request->title),
-                'desc' => $request->desc,
-                // 'file' => $filename,
-                'place' => $request->place,
-            ]);
-        }elseif ($request->hasFile('file')){
-            $gambar = $request->file('file');
-            $filename = time() . '.' . $gambar->getClientOriginalExtension();
-            Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
-            $file = Article::findOrFail($id)->update([
-                'title' => $request->title,
-                'slug' => str_slug($request->title),
-                'desc' => $request->desc,
-                'file' => $filename,
-                'place' => $request->place,
-            ]);
+        if($request->get('publish')){
+            if ($request->hasFile('file') == 0) {
+                $file = Article::findOrFail($id)->update([
+                    'title' => $request->title,
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    'status' => 'published',
+                    'place' => $request->place,
+                ]);
+            }elseif ($request->hasFile('file')){
+                $gambar = $request->file('file');
+                $filename = time() . '.' . $gambar->getClientOriginalExtension();
+                Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+                $file = Article::findOrFail($id)->update([
+                    'title' => $request->title,
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    'file' => $filename,
+                    'status' => 'published',
+                    'place' => $request->place,
+                ]);
+            }elseif($request->all() == 0){
+                return redirect(Help::url('article'))->with('message', 'Artikel telah ditampilkan!');    
+            }
+            return redirect(Help::url('article'))->with('message', 'Artikel perubahan telah ditampilkan!');
+        }elseif($request->get('archive')){
+            if ($request->hasFile('file') == 0) {
+                // Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+                $file = Article::findOrFail($id)->update([
+                    'title' => $request->title,
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    // 'file' => $filename,
+                    'status' => 'archived',
+                    'place' => $request->place,
+                ]);
+            }elseif ($request->hasFile('file')){
+                $gambar = $request->file('file');
+                $filename = time() . '.' . $gambar->getClientOriginalExtension();
+                Image::make($gambar)->resize(365, 280)->save(public_path('/images/article/'.$filename));
+                $file = Article::findOrFail($id)->update([
+                    'title' => $request->title,
+                    'slug' => str_slug($request->title),
+                    'desc' => $request->desc,
+                    'file' => $filename,
+                    'status' => 'archived',
+                    'place' => $request->place,
+                ]);
+            }
+            return redirect(Help::url('article'))->with('message', 'Artikel telah disimpan di draft!');
         }
-        return redirect(Help::url('article'))->with('message', 'Artikel telah diperbaharui!');
+
     }
 
     /**

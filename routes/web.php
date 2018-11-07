@@ -45,7 +45,10 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 
     // Route::get('article/{id}', 'ArticleController@edit');
     // Route::put('article/update', 'ArticleController@updateArticle');
     // Route::delete('article/{id}', 'ArticleController@destroy');
-    Route::resource('comment', 'CommentController');
+    // Route::resource('comment', 'CommentController');
+    Route::get('comment', 'CommentController@index');
+    Route::post('comment/approve/{id}', 'CommentController@approve');
+    Route::delete('comment/{id}', 'CommentController@destroy');
 });
 
 
@@ -55,7 +58,10 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 
 /* USER */
 
 Route::get('/', 'User\HomeController@index');
-Route::resource('article', 'User\ArticleController');
+// Route::resource('article', 'User\ArticleController');
+Route::get('article', 'User\ArticleController@index');
+Route::get('article/{slug}', 'User\ArticleController@show');
+Route::post('article/{id}', 'User\ArticleController@store');
 Route::get('about-us', function(){
     return view('frontend.about.index');
 });
