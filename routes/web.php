@@ -20,16 +20,28 @@ Route::get('/login', function(){
     return view('admin');
 });
 
+Route::get('/note', function(){
+    return view('note.login');
+});
+
 Route::get('/home', function(){
     return redirect('/redirecting');
 });
 
 Route::get('/redirecting', function(){
-    if(Auth::user()->role == 'sadmin'){
-        return redirect('sadmin');
+    if(Auth::user()->role == 'master'){
+        return redirect('master');
     }elseif(Auth::user()->role == 'admin'){
         return redirect('admin');
     }
+});
+
+Route::group(['middleware' => 'role:master', 'prefix' => 'master', 'namespace' => 'Master'], function(){
+    Route::get('/', function(){
+        return redirect('master/dashboard');
+    });
+    Route::get('logout', 'LoginController@logout');
+    Route::get('dashboard', 'DashboardController@index');
 });
 
 Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function(){
@@ -67,3 +79,5 @@ Route::get('about-us', function(){
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+

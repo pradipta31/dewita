@@ -27,6 +27,30 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'created_at' => NOW(),
                 'updated_at' => NOW()
+            ],
+            [
+                'name' => 'Ni Wayan Kastini',
+                'email' => 'wayan.kastini@gmail.com',
+                'role' => 'master',
+                'password' => Hash::make('123456'),
+                'created_at' => NOW(),
+                'updated_at' => NOW()
+            ],
+            [
+                'name' => 'I Gede Pradipta Adi Nugraha',
+                'email' => 'pradipta@gmail.com',
+                'role' => 'master',
+                'password' => Hash::make('123456'),
+                'created_at' => NOW(),
+                'updated_at' => NOW()
+            ],
+            [
+                'name' => 'Ni Made Wahyu Cahyani',
+                'email' => 'cahyaniwahyu7@gmail.com',
+                'role' => 'master',
+                'password' => Hash::make('123456'),
+                'created_at' => NOW(),
+                'updated_at' => NOW()
             ]
         ]);
     }

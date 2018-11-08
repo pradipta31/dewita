@@ -37,6 +37,16 @@
             </ul>
           </li> --}}
           <li><a href="#"><i class="fa fa-user"></i> Profile </a></li>
+          @elseif(Auth::user()->role == 'master')
+          <li><a href="{{Help::url('dashboard')}}"><i class="fa fa-home"></i> Dashboard </a></li>
+          <li><a><i class="fa fa-book"></i> Pulsa <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+              <li><a href="{{Help::url('article/create')}}">Tambah Utang</a></li>
+              <li><a href="{{Help::url('article')}}">Pulsa</a></li>
+            </ul>
+          </li>
+          <li><a href="{{Help::url('comment')}}"><i class="fa fa-users"></i> Komentar </a></li>
+          <li><a href="#"><i class="fa fa-user"></i> Profile </a></li>
           @endif
         </ul>
       </div>
