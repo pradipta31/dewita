@@ -10,7 +10,7 @@
 
                 <!-- footer logo -->
                 <div class="footer-logo">
-                    <a href="{{url('/')}}"><img src="{{asset('images/logo_pembaruan.png')}}" alt="logo"></a>
+                    <a href="{{url('/')}}"><img src="{{asset('images/boneka.png')}}" alt="logo"></a>
                 </div>
                 <!-- /footer logo -->
 
