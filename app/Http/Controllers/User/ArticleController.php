@@ -56,7 +56,7 @@ class ArticleController extends Controller
         $c->article_id = $n->id;
         $c->save();
 
-        return redirect()->back()->with('success', 'Komentar anda berhasil dikirim!');
+        return redirect()->back()->with('message', 'Komentar anda berhasil dikirim!');
     }
 
     /**

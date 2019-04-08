@@ -15,7 +15,7 @@
 
 <body>
 	<header id="home">
-		<div class="bg-img" style="background-image: url('/frontend/img/background1.jpg');">
+		<div class="bg-img" style="background-image: url('/images/background.png');">
 			<div class="overlay"></div>
 		</div>
 		<!-- /Background Image -->
@@ -30,7 +30,7 @@
 
 	</header>
 	<!-- /Header -->
-	
+
 
 	</div>
     <!-- Blog -->
@@ -44,7 +44,7 @@
 	<!-- Footer -->
 	@include('frontend.layouts.footer')
 
-	
+
 	<!-- /Footer -->
 
 	<!-- Back to top -->

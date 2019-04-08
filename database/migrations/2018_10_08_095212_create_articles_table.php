@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->text('desc');
             $table->string('place');
             $table->enum('status',['published','archived'])->default('archived');

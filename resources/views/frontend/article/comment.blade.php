@@ -7,8 +7,10 @@
             Comments
         @endif
     </h3>
-    @if (session()->has('success'))
-        <h1>{{ session('success') }}</h1>
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
     @endif
     <!-- comment -->
     @foreach ($comment as $c)

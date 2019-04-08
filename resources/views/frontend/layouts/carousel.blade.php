@@ -6,7 +6,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="home-content">
                     <div class="image">
-                        <img src="{{asset('images/logo_dewita.png')}}" alt="" height="250px" width="250px">
+                        <img src="{{asset('images/boneka.png')}}" alt="" height="350px" width="350px">
                     </div>
                     <h1 class="white-text">"Belanja Asik ?</h1>
                     <h1 class="white-text">Dewita.co Aja!"</h1>
