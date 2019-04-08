@@ -3,7 +3,7 @@
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="{{asset('images/logo_dewita.png')}}" alt="..." class="img-circle profile_img">
+        <img src="{{asset('images/logo_pembaruan.png')}}" alt="..." class="img-circle profile_img">
       </div>
       <div class="profile_info">
         <span>Welcome,</span>
@@ -46,7 +46,6 @@
             </ul>
           </li>
           <li><a href="{{Help::url('comment')}}"><i class="fa fa-users"></i> Komentar </a></li>
-          <li><a href="#"><i class="fa fa-user"></i> Profile </a></li>
           @endif
         </ul>
       </div>
