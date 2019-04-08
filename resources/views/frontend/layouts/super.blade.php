@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dewita Web Page</title>
+	<link rel="icon" href="{{url('images/logo_pembaruan.png')}}">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}" />
     <link type="text/css" rel="stylesheet" href="{{asset('frontend/css/style.css')}}" />
