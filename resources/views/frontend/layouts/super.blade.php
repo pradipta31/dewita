@@ -18,40 +18,13 @@
 		<div class="bg-img" style="background-image: url('/images/background.png');">
 			<div class="overlay"></div>
 		</div>
-		<!-- /Background Image -->
-
-		<!-- Nav -->
 		@include('frontend.layouts.navigation')
-		<!-- /Nav -->
-
-		<!-- home wrapper -->
 		@include('frontend.layouts.carousel')
-		<!-- /home wrapper -->
-
 	</header>
-	<!-- /Header -->
-
-
 	</div>
-    <!-- Blog -->
 	@include('frontend.article.article')
-	{{-- @yield('content') --}}
-	<!-- /Blog -->
-
-	<!-- Contact -->
-
-
-	<!-- Footer -->
 	@include('frontend.layouts.footer')
-
-
-	<!-- /Footer -->
-
-	<!-- Back to top -->
 	<div id="back-to-top"></div>
-	<!-- /Back to top -->
-
-	<!-- Preloader -->
 	<div id="preloader">
 		<div class="preloader">
 			<span></span>
@@ -60,9 +33,6 @@
 			<span></span>
 		</div>
 	</div>
-	<!-- /Preloader -->
-
-	<!-- jQuery Plugins -->
 	<script type="text/javascript" src="{{asset('frontend/js/jquery.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
